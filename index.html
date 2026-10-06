@@ -1,257 +1,71 @@
- <!-- =====================================
-       FALLING DROPS
-  ====================================== -->
 
-  <div class="rain">
+function goToTelegram() {
 
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
-    <span class="drop"></span>
+      if (redirected) return;
 
-  </div>
+      redirected = true;
 
-
-  <!-- =====================================
-       LANDING PAGE
-  ====================================== -->
-
-  <main class="page">
-
-    <section class="card">
-
-
-      <!-- LOGO -->
-
-      <div class="logo-container">
-
-        <img
-          class="logo"
-          src="https://i.ibb.co/sdvftkSh/IMG-20261007-011321-433.jpg"
-          alt="Jackpot King Guru"
-        >
-
-      </div>
-
-
-      <!-- TITLE -->
-
-      <h1>
-        Jackpot King Guru
-        <span class="fire">🔥</span>
-      </h1>
-
-
-      <div class="estd">
-        ESTD 2015
-      </div>
-
-
-      <div class="subtitle">
-
-        Daily clean &amp; structured updates
-        delivered directly to your Telegram.
-
-      </div>
-
-
-      <!-- FEATURES -->
-
-      <div class="features">
-
-        <div class="feature">
-
-          <span class="check">✓</span>
-
-          <span>
-            No spam, only genuine updates
-          </span>
-
-        </div>
-
-
-        <div class="feature">
-
-          <span class="check">✓</span>
-
-          <span>
-            Easy-to-understand information
-          </span>
-
-        </div>
-
-
-        <div class="feature">
-
-          <span class="check">✓</span>
-
-          <span>
-            Real-time alerts &amp; notifications
-          </span>
-
-        </div>
-
-
-        <div class="feature">
-
-          <span class="check">✓</span>
-
-          <span>
-            Join our Telegram community
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <!-- JOIN BUTTON -->
-
-      <button
-        class="join-button"
-        id="joinButton"
-        onclick="joinTelegram()"
-      >
-
-        🚀 Join Channel Now
-
-      </button>
-
-
-      <!-- COUNTDOWN -->
-
-      <div class="redirect">
-
-        Redirecting to Telegram in
-        <span id="countdown">10</span>
-        seconds...
-
-      </div>
-
-
-      <div class="footer">
-
-        Jackpot King Guru • ESTD 2015
-
-      </div>
-
-
-    </section>
-
-  </main>
-
-
-
-  <!-- =====================================
-       JAVASCRIPT
-  ====================================== -->
-
-  <script>
-
-    const TELEGRAM_URL =
-      "https://t.me/+zm-nDu_ZD48zYmU1";
-
-
-    let redirected = false;
-
-
-    /*
-      META EVENT
-      Subscribe + Custom JoinTelegram
-    */
-
-    function trackSubscribe() {
-
-      if (typeof fbq !== "undefined") {
-
-        fbq("track", "Subscribe");
-
-        fbq(
-          "trackCustom",
-          "JoinTelegram"
-        );
-
-      }
+      window.location.href =
+        telegramLink;
 
     }
 
 
     /*
       BUTTON CLICK
+
+      1. Subscribe event
+      2. Telegram redirect
     */
 
-    function joinTelegram() {
+    joinButton.addEventListener(
+      "click",
+      function () {
 
-      if (redirected) return;
+        trackSubscribe();
 
-      redirected = true;
+        setTimeout(
+          function () {
+            goToTelegram();
+          },
+          150
+        );
 
-      trackSubscribe();
-
-
-      /*
-        300ms delay so Meta Pixel
-        gets time to fire the event.
-      */
-
-      setTimeout(function() {
-
-        window.location.href =
-          TELEGRAM_URL;
-
-      }, 300);
-
-    }
+      }
+    );
 
 
     /*
-      10 SECOND AUTO REDIRECT
+      AUTO REDIRECT
+
+      10 seconds after page opens.
+
+      NOTE:
+      Subscribe is NOT fired here automatically,
+      because a visitor may leave without actually
+      clicking the Join button.
     */
 
-    let seconds = 10;
-
     const countdown =
-      document.getElementById("countdown");
+      setInterval(
+        function () {
 
+          seconds--;
 
-    const timer =
-      setInterval(function() {
+          timer.textContent =
+            seconds;
 
-        seconds--;
+          if (seconds <= 0) {
 
-        countdown.textContent =
-          seconds;
+            clearInterval(countdown);
 
-
-        if (seconds <= 0) {
-
-          clearInterval(timer);
-
-
-          if (!redirected) {
-
-            redirected = true;
-
-            trackSubscribe();
-
-
-            window.location.href =
-              TELEGRAM_URL;
+            goToTelegram();
 
           }
 
-        }
-
-      }, 1000);
+        },
+        1000
+      );
 
   </script>
 
