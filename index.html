@@ -1,234 +1,260 @@
-/* =====================================
-       MAIN CARD
-    ====================================== */
+ <!-- =====================================
+       FALLING DROPS
+  ====================================== -->
 
-    .card {
+  <div class="rain">
 
-      width: 100%;
-      max-width: 590px;
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
+    <span class="drop"></span>
 
-      padding: 42px 30px 38px;
-
-      background: rgba(27, 12, 47, 0.95);
-
-      border-radius: 28px;
-
-      border: 1px solid rgba(190, 90, 255, 0.15);
-
-      box-shadow:
-        0 0 35px rgba(165, 65, 255, 0.25),
-        0 25px 80px rgba(0, 0, 0, 0.5);
-
-      backdrop-filter: blur(12px);
-
-      text-align: center;
-    }
+  </div>
 
 
-    /* =====================================
-       LOGO
-    ====================================== */
+  <!-- =====================================
+       LANDING PAGE
+  ====================================== -->
 
-    .logo-container {
+  <main class="page">
 
-      width: 145px;
-      height: 145px;
+    <section class="card">
 
-      margin: 0 auto 24px;
 
-      padding: 5px;
+      <!-- LOGO -->
 
-      border-radius: 50%;
+      <div class="logo-container">
 
-      background:
-        linear-gradient(
-          135deg,
-          #d061ff,
-          #7b35ff,
-          #c45cff
+        <img
+          class="logo"
+          src="https://i.ibb.co/sdvftkSh/IMG-20261007-011321-433.jpg"
+          alt="Jackpot King Guru"
+        >
+
+      </div>
+
+
+      <!-- TITLE -->
+
+      <h1>
+        Jackpot King Guru
+        <span class="fire">🔥</span>
+      </h1>
+
+
+      <div class="estd">
+        ESTD 2015
+      </div>
+
+
+      <div class="subtitle">
+
+        Daily clean &amp; structured updates
+        delivered directly to your Telegram.
+
+      </div>
+
+
+      <!-- FEATURES -->
+
+      <div class="features">
+
+        <div class="feature">
+
+          <span class="check">✓</span>
+
+          <span>
+            No spam, only genuine updates
+          </span>
+
+        </div>
+
+
+        <div class="feature">
+
+          <span class="check">✓</span>
+
+          <span>
+            Easy-to-understand information
+          </span>
+
+        </div>
+
+
+        <div class="feature">
+
+          <span class="check">✓</span>
+
+          <span>
+            Real-time alerts &amp; notifications
+          </span>
+
+        </div>
+
+
+        <div class="feature">
+
+          <span class="check">✓</span>
+
+          <span>
+            Join our Telegram community
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- JOIN BUTTON -->
+
+      <button
+        class="join-button"
+        id="joinButton"
+        onclick="joinTelegram()"
+      >
+
+        🚀 Join Channel Now
+
+      </button>
+
+
+      <!-- COUNTDOWN -->
+
+      <div class="redirect">
+
+        Redirecting to Telegram in
+        <span id="countdown">10</span>
+        seconds...
+
+      </div>
+
+
+      <div class="footer">
+
+        Jackpot King Guru • ESTD 2015
+
+      </div>
+
+
+    </section>
+
+  </main>
+
+
+
+  <!-- =====================================
+       JAVASCRIPT
+  ====================================== -->
+
+  <script>
+
+    const TELEGRAM_URL =
+      "https://t.me/+zm-nDu_ZD48zYmU1";
+
+
+    let redirected = false;
+
+
+    /*
+      META EVENT
+      Subscribe + Custom JoinTelegram
+    */
+
+    function trackSubscribe() {
+
+      if (typeof fbq !== "undefined") {
+
+        fbq("track", "Subscribe");
+
+        fbq(
+          "trackCustom",
+          "JoinTelegram"
         );
 
-      box-shadow:
-        0 0 25px rgba(190, 70, 255, 0.8),
-        0 0 55px rgba(125, 43, 255, 0.4);
+      }
+
     }
 
 
-    .logo {
+    /*
+      BUTTON CLICK
+    */
 
-      width: 100%;
-      height: 100%;
+    function joinTelegram() {
 
-      object-fit: cover;
+      if (redirected) return;
 
-      border-radius: 50%;
+      redirected = true;
 
-      border: 4px solid #251034;
+      trackSubscribe();
 
-      display: block;
+
+      /*
+        300ms delay so Meta Pixel
+        gets time to fire the event.
+      */
+
+      setTimeout(function() {
+
+        window.location.href =
+          TELEGRAM_URL;
+
+      }, 300);
+
     }
 
 
-    /* =====================================
-       HEADING
-    ====================================== */
+    /*
+      10 SECOND AUTO REDIRECT
+    */
 
-    h1 {
+    let seconds = 10;
 
-      font-size: 30px;
+    const countdown =
+      document.getElementById("countdown");
 
-      line-height: 1.2;
 
-      font-weight: 800;
+    const timer =
+      setInterval(function() {
 
-      margin-bottom: 12px;
+        seconds--;
 
-      letter-spacing: -0.5px;
-    }
+        countdown.textContent =
+          seconds;
 
 
-    .fire {
-      margin-left: 5px;
-    }
+        if (seconds <= 0) {
 
+          clearInterval(timer);
 
-    .estd {
 
-      color: #cda8e8;
+          if (!redirected) {
 
-      font-size: 15px;
+            redirected = true;
 
-      font-weight: 600;
+            trackSubscribe();
 
-      letter-spacing: 1px;
 
-      margin-bottom: 12px;
-    }
+            window.location.href =
+              TELEGRAM_URL;
 
+          }
 
-    .subtitle {
+        }
 
-      color: #d9d0e2;
+      }, 1000);
 
-      font-size: 17px;
+  </script>
 
-      line-height: 1.55;
 
-      margin-bottom: 28px;
-    }
-
-
-    /* =====================================
-       FEATURES
-    ====================================== */
-
-    .features {
-
-      max-width: 470px;
-
-      margin: 0 auto 30px;
-
-      text-align: left;
-    }
-
-
-    .feature {
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-
-      margin: 18px 0;
-
-      font-size: 16px;
-
-      color: #eee7f4;
-    }
-
-
-    .check {
-
-      flex-shrink: 0;
-
-      color: #c15cff;
-
-      font-size: 21px;
-
-      font-weight: bold;
-
-      text-shadow:
-        0 0 12px rgba(193, 92, 255, 0.8);
-    }
-
-
-    /* =====================================
-       JOIN BUTTON
-    ====================================== */
-
-    .join-button {
-
-      width: 100%;
-
-      border: none;
-
-      border-radius: 16px;
-
-      padding: 19px 20px;
-
-      font-size: 19px;
-
-      font-weight: 800;
-
-      color: #ffffff;
-
-      cursor: pointer;
-
-      background:
-        linear-gradient(
-          90deg,
-          #9e35ff,
-          #c25bff,
-          #9e35ff
-        );
-
-      box-shadow:
-        0 8px 30px rgba(175, 60, 255, 0.5);
-
-      transition: all 0.2s ease;
-    }
-
-
-    .join-button:hover {
-
-      transform: translateY(-2px);
-
-      box-shadow:
-        0 12px 38px rgba(175, 60, 255, 0.7);
-    }
-
-
-    .join-button:active {
-
-      transform: scale(0.98);
-    }
-
-
-    /* =====================================
-       COUNTDOWN
-    ====================================== */
-
-    .redirect {
-
-      margin-top: 18px;
-
-      color: #aaa0b5;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-    }
-
-
-    #countdown
+</body>
+</html>
